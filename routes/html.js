@@ -1,19 +1,12 @@
 var express=require("express")
 var router = express.Router();
+var controller = require("../controllers/html")
+router.get("/",controller.index);
 
-router.get("/",function(req,res){
-  console.log(req);
-  res.send("you are on the homepage");
-});
+router.get("/tables",controller.tables);
+  
 
-router.get("/tables",function(req,res){
-  console.log(req);
-  res.send("you are on the tables page");
-});
-
-router.get("/reserve",function(req,res){
-  console.log(req);
-  res.send("you are on the reservation page");
-});
+router.get("/reserve",controller.reserve);
+  
 
 module.exports = router;
