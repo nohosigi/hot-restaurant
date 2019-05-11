@@ -1,3 +1,5 @@
+
+let numTables = 5;
 let tables = [
     {
     "customerName": "tyrion lannister",
@@ -8,18 +10,6 @@ let tables = [
 ];
 
 let waitlist = [
-        {
-        "customerName": "",
-        "phoneNumber": "",
-        "customerEmail": "",
-        "customerID": ""
-        },
-        {
-        "customerName": "",
-        "phoneNumber": "",
-        "customerEmail": "",
-        "customerID": ""
-        },
         {
         "customerName": "Samuel",
         "phoneNumber": "Fillingim",
@@ -38,13 +28,22 @@ var ApiController = {
     },
 
     postTables: function (req,res){
-        tables.push(req.body);
+        const newCustomer = req.body;
+        if(tables.length <= numTables){
+            tables.push(newCustomer);
+        }else{
+            waitlist.push(newCustomer);
+        }
+
         res.json(req.body);
     },
     
     clear: function(req,res){
-        console.log(req);
-        res.send("clear");
+        tables.splice(0, 1);
+        if(waitlist.length){
+            tables.push(waitlist.shift());
+        }
+        res.send("cleared table");
     }
 } 
 
