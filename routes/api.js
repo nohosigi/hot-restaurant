@@ -1,19 +1,13 @@
 var express=require("express")
 var router = express.Router();
+var controller = require("../controllers/api")
 
-router.get("/waitlist",function(req,res){
-  console.log(req);
-  res.send("waiting list");
-});
+router.get("/waitlist",controller.waitlist)
 
-router.get("/tables",function(req,res){
-  console.log(req);
-  res.send("avalible tables");
-});
+router.get("/tables",controller.getTables);
+router.post("/tables",controller.postTables);
 
-router.get("/clear",function(req,res){
-  console.log(req);
-  res.send("clear");
-});
+
+router.get("/clear",controller.clear);
 
 module.exports = router;
