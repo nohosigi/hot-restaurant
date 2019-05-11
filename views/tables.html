@@ -54,9 +54,19 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            // connect db
+            $.get("/api/tables").then(data=>{
 
-            // submit on-click event
+              if(data){
+                $("#appt-table").empty();
+                data.forEach(table=>{
+                  let tr = $("<tr>");
+                  Object.keys(table).forEach(key=>{
+                    tr.append(`<td>${table[key]}</td>`);
+                  });
+                  $("#appt-table").append(tr);
+                })
+              }
+            })
 
         });
     </script>
