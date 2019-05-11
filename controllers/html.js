@@ -1,17 +1,18 @@
+var path = require("path");
+
 var HtmlController = {
     index: function(req,res){
-        console.log(req);
-        res.send("you are on the homepage");
+        res.sendFile(path.join(__dirname, "../views/index.html"));
     },
     
     tables: function (req,res){
         console.log(req);
-        res.send("you are on the tables page");
+        res.sendFile(path.join(__dirname, "../views/tables.html"));
     },
     
     reserve: function(req,res){
         console.log(req);
-        res.send("you are on the reservation page");
+        res.sendFile(path.join(__dirname, "../views/reserve.html"));
     }   
 } 
 
