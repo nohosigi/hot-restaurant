@@ -23,8 +23,8 @@
                 <h1>Hot Restaurant</h1>
                 <h3>Make Your Reservation</h3>
                 <hr>
-                <a class="btn btn-primary btn-large">View Tables <i class='fas fa-hot-tub'></i></a>
-                <a class="btn btn-danger btn-large">Make Reservation <i class='fas fa-credit-card'></i></a>
+                <a href="../views/tables.html" class="btn btn-primary btn-large">View Tables <i class='fas fa-hot-tub'></i></a>
+                <a href="../views/reserve.html" class="btn btn-danger btn-large">Make Reservation <i class='fas fa-credit-card'></i></a>
             </div>
             <div class="row">
 
@@ -58,7 +58,8 @@
                                 <label for="user-id">Unique ID</label>
                                 <input type="text" class="form-control form-control-sm" id="user-id">
                             </div>
-                            <button type="button" class="btn btn-primary" style="margin-top:10px">Submit</button>
+                            <button type="button" class="btn btn-primary" id="submit-btn"
+                                style="margin-top:10px">Submit</button>
                         </form>
                     </div>
                 </div>
@@ -71,12 +72,22 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <script type="text/javascript">
-        $(document).ready(function () {
-            // connect db
+        $("#submit-btn").on("click", function () {
+            var name = $("#user-name").val().trim();
+            var phone = $("#user-phone").val().trim();
+            var email = $("#user-email").val().trim();
+            var userId = $("#user-id").val().trim();
+            var newCustomer = {
+                name, phone, email, userId
+            }
+            $.post("/api/tables", newCustomer)
+                .then(function (data) {
+                    console.log("add.html", data);
+                    alert("Adding customer...");
+                    window.location.href = "../tables";
+                });
+        })
 
-            // submit on-click event
-
-        });
     </script>
 
 </body>
